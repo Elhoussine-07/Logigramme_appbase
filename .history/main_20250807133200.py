@@ -22,7 +22,7 @@ def main():
     for block in blocks:
         if block["class"] == "ReadVar":
             var_id = block["parameters"]["Id"]
-            val = get_last_value(cursor, var_id)
+            val = get_last_value(cursor, var_id,var_id)
             Values.append(val)
             variables[f"var_{var_id}"] = val
        

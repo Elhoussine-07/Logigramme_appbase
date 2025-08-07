@@ -18,12 +18,8 @@ def get_rule_json(cursor,id_rule):
 def get_last_value(cursor, var_id):
     
     cursor.execute(
-        """SELECT TOP 1 val_valide FROM his_valeur WHERE id_variable = ?  AND id_qualification = 0 AND date_acquisition = (
-            SELECT MIN(date_acquisition)
-            FROM his_valeur
-            WHERE id_variable = ? AND id_qualification = 0
-        )""",
-        var_id,var_id
+        "SELECT TOP 1 val_valide FROM his_valeur WHERE id_variable = ?  AND id_qualification = 0 ORDER BY date_acquisition DESC",
+        var_id
     )
     result = cursor.fetchone()
     return result[0] if result else None
@@ -32,15 +28,15 @@ def get_last_value(cursor, var_id):
 def mark_as_processed(cursor, var_id):
     cursor.execute("""
         UPDATE his_valeur
-        SET id_qualification = 1
-        WHERE id_variable = ?
-        AND id_qualification = 0
-        AND date_acquisition = (
-            SELECT MIN(date_acquisition)
-            FROM his_valeur
-            WHERE id_variable = ? AND id_qualification = 0
-        )
-     """, (var_id, var_id))
+       # SET id_qualification = 1
+       # WHERE id_variable = ?
+       #   AND id_qualification = 0
+       # AND date_acquisition = (
+       #     SELECT MIN(date_acquisition)
+        #    FROM his_valeur
+       #     WHERE id_variable = ? AND id_qualification = 0
+       # )
+  #  """, (var_id, var_id))
 
 
 

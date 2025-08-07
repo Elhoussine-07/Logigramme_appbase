@@ -15,7 +15,7 @@ def get_rule_json(cursor,id_rule):
     return row[0] if row else None
 
 
-def get_last_value(cursor, var_id):
+def get_last_value(cursor, var_id,):
     
     cursor.execute(
         """SELECT TOP 1 val_valide FROM his_valeur WHERE id_variable = ?  AND id_qualification = 0 AND date_acquisition = (
@@ -23,7 +23,7 @@ def get_last_value(cursor, var_id):
             FROM his_valeur
             WHERE id_variable = ? AND id_qualification = 0
         )""",
-        var_id,var_id
+        var_id
     )
     result = cursor.fetchone()
     return result[0] if result else None

@@ -22,8 +22,8 @@ def get_last_value(cursor, var_id):
             SELECT MIN(date_acquisition)
             FROM his_valeur
             WHERE id_variable = ? AND id_qualification = 0
-        )""",
-        var_id,var_id
+        )"",
+        var_id
     )
     result = cursor.fetchone()
     return result[0] if result else None

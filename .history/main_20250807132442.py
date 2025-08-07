@@ -1,5 +1,5 @@
 import json
-from database import get_connection, get_rule_json, get_last_value, insert_result,mark_as_processed
+from database import get_connection, get_rule_json, get_last_value, insert_result,mark
 
 def main():
     conn = get_connection()

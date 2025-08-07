@@ -1,5 +1,5 @@
 import json
-from database import get_connection, get_rule_json, get_last_value, insert_result,mark_as_processed
+from database import get_connection, get_rule_json, get_last_value, insert_result
 
 def main():
     conn = get_connection()
@@ -43,12 +43,11 @@ def main():
     print(f"Résultat: {result}")
 
 
-    insert_result(cursor, result_varId, result)
-    
+    insert_result(cursor, result_varId, result
     for block in blocks:
         if block["class"] == "ReadVar":
-            var_id = block["parameters"]["Id"]
-            mark_as_processed(cursor, var_id)
+       #     var_id = block["parameters"]["Id"]
+       #     mark_as_processed(cursor, var_id)
 
     conn.commit()
     print("Résultat stocké et variables marquées comme traitées avec succès.")
