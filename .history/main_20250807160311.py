@@ -1,5 +1,5 @@
 import json
-from database import get_connection, get_rule_json,get_common_values
+from database import get_connection, get_rule_json, get_last_value, insert_result,mark_as_processed,get_common_values
 
 def main():
     conn = get_connection()
@@ -61,4 +61,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

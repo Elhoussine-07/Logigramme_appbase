@@ -15,36 +15,37 @@ def get_rule_json(cursor,id_rule):
     return row[0] if row else None
 
 
+#
+
+
+def mark_as_processed(cursor, var_id):
+    cursor.execute("""
+        UPDATE his_valeur
+        SET id_qualification = 1
+        WHERE id_variable = ?
+        AND id_qualification = 0
+        AND date_acquisition = (
+            SELECT MIN(date_acquisition)
+            FROM his_valeur
+            WHERE id_variable = ? AND id_qualification = 0
+        )
+     """, (var_id, var_id))
 
 
 
-#def mark_as_processed(cursor, var_id):
-    #cursor.execute("""
-    # ""   UPDATE his_valeur
-      #  SET id_qualification = 1
-      #  WHERE id_variable = ?
-       # AND id_qualification = 0
-      #  AND date_acquisition = (
-      #      SELECT MIN(date_acquisition)    
-      #      FROM his_valeur
-     #       WHERE id_variable = ? AND id_qualification = 0
-      #  )
-    # """, (var_id, var_id))
 
-
-
-
-#def insert_result(cursor, var_id, valeur):
-    #cursor.execute("""
-        #INSERT INTO his_valeur (
-            #id_variable, date_acquisition, id_qualification, date_insertion,  val_brute, val_valide
-        #)
-        #VALUES (?, GETDATE() ,0,GETDATE(), ?,?)
-    #""", var_id, valeur, valeur)
+def insert_result(cursor, var_id, valeur):
+    cursor.execute("""
+        INSERT INTO his_valeur (
+            id_variable, date_acquisition, id_qualification, date_insertion,  val_brute, val_valide
+        )
+        VALUES (?, GETDATE() ,0,GETDATE(), ?,?)
+    """, var_id, valeur, valeur)
 
 
 
 def get_common_values(cursor, variable_ids):
+    # Dictionnaire des dates par variable
     dates_by_var = {}
     for var_id in variable_ids:
         cursor.execute("""

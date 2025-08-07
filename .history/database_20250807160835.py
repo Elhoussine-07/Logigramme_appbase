@@ -34,17 +34,18 @@ def get_rule_json(cursor,id_rule):
 
 
 
-#def insert_result(cursor, var_id, valeur):
-    #cursor.execute("""
-        #INSERT INTO his_valeur (
-            #id_variable, date_acquisition, id_qualification, date_insertion,  val_brute, val_valide
-        #)
-        #VALUES (?, GETDATE() ,0,GETDATE(), ?,?)
-    #""", var_id, valeur, valeur)
+def insert_result(cursor, var_id, valeur):
+    cursor.execute("""
+        INSERT INTO his_valeur (
+            id_variable, date_acquisition, id_qualification, date_insertion,  val_brute, val_valide
+        )
+        VALUES (?, GETDATE() ,0,GETDATE(), ?,?)
+    """, var_id, valeur, valeur)
 
 
 
 def get_common_values(cursor, variable_ids):
+    # Dictionnaire des dates par variable
     dates_by_var = {}
     for var_id in variable_ids:
         cursor.execute("""

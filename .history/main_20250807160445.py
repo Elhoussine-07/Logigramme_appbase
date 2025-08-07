@@ -1,5 +1,5 @@
 import json
-from database import get_connection, get_rule_json,get_common_values
+from database import get_connection, get_rule_json, get_last_value, insert_result,mark_as_processed,get_common_values
 
 def main():
     conn = get_connection()
@@ -8,6 +8,7 @@ def main():
     json_text = get_rule_json(cursor, 1)
     if not json_text:
         raise Exception("Aucune règle")
+
 
     json_data = json.loads(json_text)
     blocks = json_data["blocks"]

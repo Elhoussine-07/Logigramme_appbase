@@ -45,6 +45,7 @@ def get_rule_json(cursor,id_rule):
 
 
 def get_common_values(cursor, variable_ids):
+    # Dictionnaire des dates par variable
     dates_by_var = {}
     for var_id in variable_ids:
         cursor.execute("""
